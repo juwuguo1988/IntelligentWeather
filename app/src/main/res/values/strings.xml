@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">智能天气</string>
+
+    <string name="no_place_search">未能查询到任何地点</string>
 </resources>
