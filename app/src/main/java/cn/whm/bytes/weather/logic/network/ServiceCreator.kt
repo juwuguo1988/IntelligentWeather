@@ -1,6 +1,8 @@
 package cn.whm.bytes.weather.logic.network
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.util.logging.Level
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -9,8 +11,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ServiceCreator {
     private const val BASE_URL = "https://api.caiyunapp.com/"
 
+
+    private val loggingInterceptor = HttpLoggingInterceptor("OkGo")
+        .setPrintLevel(HttpLoggingInterceptor.Level.BODY)
+        .setColorLevel(Level.WARNING)
+
+    private val builder = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(builder.build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

@@ -42,4 +42,10 @@ class PlaceViewModel : ViewModel() {
     }
 
 
+    fun savePlace(place: PlaceBean) = RepositoryControllor.savePlace(place)
+
+    fun getSavedPlace() = RepositoryControllor.getSavedPlace()
+
+    fun isPlaceSaved() = RepositoryControllor.isPlaceSaved()
+
 }

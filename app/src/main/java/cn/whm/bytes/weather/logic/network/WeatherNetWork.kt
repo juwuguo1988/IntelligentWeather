@@ -18,6 +18,16 @@ object WeatherNetWork {
 
     suspend fun searchPlaces(query: String) = placeService.searchPlaces(query).await()
 
+
+    private val weatherService = ServiceCreator.create<WeatherService>()
+
+    suspend fun getDailyWeather(lng: String, lat: String) =
+        weatherService.getDailyWeather(lng, lat).await()
+
+    suspend fun getRealTimeWeather(lng: String, lat: String) =
+        weatherService.getRealtimeWeather(lng, lat).await()
+
+
     /**
      * 参考473页
      * 声明一个泛型T，并将await()函数定义成Call<T>的扩展函数，
