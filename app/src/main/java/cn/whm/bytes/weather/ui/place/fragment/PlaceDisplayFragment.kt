@@ -69,7 +69,7 @@ class PlaceDisplayFragment : Fragment() {
             }
         }
 
-        viewModel.placeLiveData.observe(this, Observer { result ->
+        viewModel.placeLiveData.observe(viewLifecycleOwner, Observer { result ->
             val places = result.getOrNull()
             if (places != null) {
                 rv_display_place.visibility = View.VISIBLE
