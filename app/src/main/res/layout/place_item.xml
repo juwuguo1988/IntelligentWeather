@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:layout_margin="12dp"
+    android:theme="@style/Theme.Material3.Light.SideSheetDialog"
     app:cardCornerRadius="4dp">
 
     <LinearLayout

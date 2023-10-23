@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="c_000000">#000000</color>
+    <color name="c_ffffff">#FFFFFF</color>
+    <color name="c_f4f4f4">#F4F4F4</color>
+    <color name="text_black">#18191a</color>
+    <color name="text_black2">#585c62</color>
+    <color name="text_blue">#0044ff</color>
+    <color name="default_color">#f54326</color>
+
+    <color name="c_191b20">#191B20</color>
+    <color name="c_fdf9f0">#FDF9F0</color>
+    <color name="c_4df9bf">#4DF9BF</color>
+    <color name="c_292931">#292931</color>
+    <color name="c_363d4c">#363D4C</color>
+    <color name="c_536dfe">#536DfE</color>
+    <color name="c_f06292">#F06292</color>
+    <color name="c_FFF6DB">#FFF6DB</color>
+    <color name="c_222222">#222222</color>
+    <color name="color_transparent">#00000000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <array name="graffiti_color">
+        <item>#ffffff</item>
+        <item>#b3b3b3</item>
+        <item>#333333</item>
+        <item>#000000</item>
+        <item>#f54326</item>
+        <item>#fc7802</item>
+        <item>#fbe600</item>
+        <item>#41bb54</item>
+        <item>#00eae7</item>
+        <item>#4c9efe</item>
+        <item>#fa7d7d</item>
+        <item>#825fd0</item>
+    </array>
+</resources>

@@ -10,7 +10,6 @@ import cn.whm.bytes.weather.R
 import cn.whm.bytes.weather.logic.model.PlaceBean
 import cn.whm.bytes.weather.ui.place.fragment.PlaceDisplayFragment
 import cn.whm.bytes.weather.ui.weather.WeatherActivity
-import kotlinx.android.synthetic.main.activity_weather.*
 
 /**
  * Created by juwuguo on 2020-04-21.
@@ -34,7 +33,7 @@ class PlaceDisplayAdapter(
             val place = placeList[position]
             val activity = fragment.activity
             if (activity is WeatherActivity) {
-                activity.drawerLayout.closeDrawers()
+                activity.viewBinding.drawerLayout.closeDrawers()
                 activity.viewModel.locationLng = place.location.lng
                 activity.viewModel.locationLat = place.location.lat
                 activity.viewModel.placeName = place.name

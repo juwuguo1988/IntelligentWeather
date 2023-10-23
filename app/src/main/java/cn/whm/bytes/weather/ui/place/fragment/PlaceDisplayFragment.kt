@@ -2,42 +2,44 @@ package cn.whm.bytes.weather.ui.place.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.whm.bytes.weather.BR
 import cn.whm.bytes.weather.MainActivity
 import cn.whm.bytes.weather.R
 import cn.whm.bytes.weather.SWApplication
+import cn.whm.bytes.weather.databinding.FragmentPlaceBinding
 import cn.whm.bytes.weather.ui.place.adapter.PlaceDisplayAdapter
 import cn.whm.bytes.weather.ui.place.model.PlaceViewModel
 import cn.whm.bytes.weather.ui.weather.WeatherActivity
 import cn.whm.bytes.weather.utils.spread_function.showToast
-import kotlinx.android.synthetic.main.fragment_place.*
+import com.kunminx.architecture.ui.page.BaseFragment
+import com.kunminx.architecture.ui.page.DataBindingConfig
 
 /**
  * Created by juwuguo on 2020-04-21.
  */
-class PlaceDisplayFragment : Fragment() {
+class PlaceDisplayFragment : BaseFragment() {
 
-     val viewModel by lazy {
-        ViewModelProvider(this).get(PlaceViewModel::class.java)
+    private val viewBinding: FragmentPlaceBinding by lazy {
+      binding as FragmentPlaceBinding
+    }
+
+    val viewModel: PlaceViewModel by lazy {
+        getFragmentScopeViewModel(PlaceViewModel::class.java)
+    }
+
+    override fun getDataBindingConfig(): DataBindingConfig? {
+        return DataBindingConfig(
+            R.layout.fragment_place,
+            BR.vm,
+            viewModel
+        )
     }
 
     private lateinit var adapter: PlaceDisplayAdapter
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_place, container, false)
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -53,27 +55,27 @@ class PlaceDisplayFragment : Fragment() {
             return
         }
         val layoutManager = LinearLayoutManager(activity)
-        rv_display_place.layoutManager = layoutManager
+        viewBinding.rvDisplayPlace.layoutManager = layoutManager
         adapter = PlaceDisplayAdapter(this, viewModel.placeList)
-        rv_display_place.adapter = adapter
+        viewBinding.rvDisplayPlace.adapter = adapter
 
-        et_search_place_edit.addTextChangedListener { editable ->
+        viewBinding.etSearchPlaceEdit.addTextChangedListener { editable ->
             val content = editable.toString()
             if (content.isNotEmpty()) {
                 viewModel.searchPlaces(content)
             } else {
-                rv_display_place.visibility = View.GONE
-                iv_place_bg.visibility = View.GONE
+                viewBinding.rvDisplayPlace.visibility = View.GONE
+                viewBinding.ivPlaceBg.visibility = View.GONE
                 viewModel.placeList.clear()
                 adapter.notifyDataSetChanged()
             }
         }
 
-        viewModel.placeLiveData.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
             val places = result.getOrNull()
             if (places != null) {
-                rv_display_place.visibility = View.VISIBLE
-                iv_place_bg.visibility = View.VISIBLE
+                viewBinding.rvDisplayPlace.visibility = View.VISIBLE
+                viewBinding.ivPlaceBg.visibility = View.VISIBLE
                 viewModel.placeList.clear()
                 viewModel.placeList.addAll(places)
                 adapter.notifyDataSetChanged()
@@ -81,6 +83,6 @@ class PlaceDisplayFragment : Fragment() {
                 R.string.no_place_search.showToast(SWApplication.mContext)
                 result.exceptionOrNull()?.printStackTrace()
             }
-        })
+        }
     }
 }

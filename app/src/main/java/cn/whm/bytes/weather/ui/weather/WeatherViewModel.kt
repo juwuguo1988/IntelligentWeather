@@ -1,8 +1,8 @@
 package cn.whm.bytes.weather.ui.weather
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import cn.whm.bytes.weather.logic.RepositoryControllor
 import cn.whm.bytes.weather.logic.model.LocationBean
 
@@ -18,7 +18,7 @@ class WeatherViewModel : ViewModel() {
 
     var placeName = ""
 
-    val weatherLiveData = Transformations.switchMap(locationLiveData) { location ->
+    val weatherLiveData = locationLiveData.switchMap { location ->
         RepositoryControllor.refreshWeather(location.lng, location.lat, placeName)
     }
 

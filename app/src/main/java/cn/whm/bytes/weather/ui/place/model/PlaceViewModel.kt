@@ -1,9 +1,8 @@
 package cn.whm.bytes.weather.ui.place.model
 
-import android.app.DownloadManager
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import cn.whm.bytes.weather.logic.RepositoryControllor
 import cn.whm.bytes.weather.logic.model.PlaceBean
 
@@ -33,7 +32,7 @@ class PlaceViewModel : ViewModel() {
      */
     val placeList = ArrayList<PlaceBean>()
 
-    val placeLiveData = Transformations.switchMap(searchLiveData) { query ->
+    val placeLiveData = searchLiveData.switchMap { query ->
         RepositoryControllor.searchPlaces(query)
     }
 
